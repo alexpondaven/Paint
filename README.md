@@ -1,3 +1,5 @@
-# alexpondaven.github.io
+# Paint website
 
-Website for sorting algorithms
+Website where you can paint.
+
+I used this to practice JavaScript and the p5.js library
