@@ -4,6 +4,11 @@ let sliderR;
 let sliderG;
 let sliderB;
 
+/**
+	Could add function for setting up sliders
+	Add slider for strokeweight
+**/
+
 function setup() {
 	createCanvas(
 		window.innerWidth,
