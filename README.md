@@ -1,8 +1,9 @@
-# Paint website
+# Mini JavaScript Projects
 
-Website where you can paint.
+This is a collection of projects that I have done to learn JavaScript.
 
-I used this to practice JavaScript and the p5.js library
+Include:
+- Paint site: Used p5.js library to create a site where you can draw using the cursor.
 
 Google Chrome:
-https://alexpondaven.github.io/Paint/
+https://alexpondaven.github.io/jsprojects
