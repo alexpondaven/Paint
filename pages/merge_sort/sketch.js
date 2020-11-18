@@ -26,7 +26,7 @@ function draw() {
 	// background(0);
 	// Plot array as lines
 	 // array to sort
-	
+	line(mid*width/n,0,mid*width/n,height);
 	
 	
 
@@ -37,6 +37,7 @@ function mergesort(X) {
 		return X;
 	}
 	let mid = Math.floor(X.length/2);
+	draw()
 	let L = mergesort(X.slice(0,mid));
 	let R = mergesort(X.slice(mid,X.length));
 	let out = [];
