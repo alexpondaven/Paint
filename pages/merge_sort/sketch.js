@@ -13,6 +13,7 @@ function setup() {
 	);
 	// Draw original array
 	background(0);
+	merge = new merge(array);
 	
 	for (let i=0;i<n;i++){
 		rect(i*width/n,0,width/n,array[i]);
@@ -21,28 +22,39 @@ function setup() {
 	}
 }
 
-function draw() {
+var d=0;
+
+function draw(mid) {
 	let width = window.innerWidth;
 	let height = window.innerHeight;
 	// background(0);
 	// Plot array as lines
 	// array to sort
+	merge.update();
+	merge.show();
 	
-	
-
+	// could try brute force method first
 }
 
-function merge_show(mid) {
-	stroke(255,0,0);
-	line(mid*width/n,0,mid*width/n,height);
+function merge(X) { //??
+	this.X = X;
+
+	this.update = function() {
+
+	}
 }
+
+// function merge_show(mid) {
+// 	stroke(255,0,0);
+// 	line(mid*width/n,0,mid*width/n,height);
+// }
 
 function mergesort(X) {
 	if (X.length<=1){
 		return X;
 	}
 	let mid = Math.floor(X.length/2);
-	merge_show(mid);
+	d=mid;
 	let L = mergesort(X.slice(0,mid));
 	let R = mergesort(X.slice(mid,X.length));
 	let out = [];
