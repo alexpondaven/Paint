@@ -1,16 +1,16 @@
-var grav = 1;
+var grav = 0;
 
-function Particle(x, y) {
+function Particle(x, y, name="") {
 	/**
-	get better collision function
 	add collision animation
 	**/
+	this.name = name;
 	this.x = x;
 	this.y = y;
-	this.r = 50;
+	this.r = 200;
 
 	this.xspeed = 6;
-	this.yspeed = 0;
+	this.yspeed = 5;
 
 	this.colour = color(255, 0, 255);
 
@@ -33,12 +33,12 @@ function Particle(x, y) {
 		}
 		if (this.y > height - this.r/2){ // Hits bottom
 			this.y = height - this.r/2;
-			this.yspeed = -this.yspeed + 5;
+			this.yspeed = -this.yspeed + 3*grav;
 			// this.colour = c;
 		}
 		if (this.y < this.r/2){ // hits top
 			this.y = this.r/2;
-			this.yspeed = -this.yspeed/2 + 5;
+			this.yspeed = -this.yspeed + 3*grav;
 			// this.colour = c;
 		}
 
@@ -47,5 +47,7 @@ function Particle(x, y) {
 	this.show = function() {
 		fill(this.colour);
 		circle(this.x,this.y,this.r);
+		fill(255);
+		text(this.name, this.x, this.y);
 	}
 }
