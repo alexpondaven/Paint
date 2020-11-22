@@ -1,18 +1,20 @@
 var grav = 0;
 
-function Particle(x, y, name="") {
+function Particle(x, y, r, mass, name="", colour) {
 	/**
 	add collision animation
 	**/
 	this.name = name;
 	this.x = x;
 	this.y = y;
-	this.r = 200;
+	this.r = r;
+
+	this.mass = mass;
 
 	this.xspeed = 6;
 	this.yspeed = 5;
 
-	this.colour = color(255, 0, 255);
+	this.colour = colour;
 
 	this.update = function() {
 		// let c = color(Math.floor(Math.random() * 255),
