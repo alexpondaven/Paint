@@ -114,7 +114,7 @@ function collide() { // Brute force
 			}
 			stroke(0);
 			strokeWeight(5);
-			line(ix, iy, 5*(ix+particles[i].xspeed), 5*(iy+particles[i].yspeed));
+			line(ix, iy, 10*(ix+particles[i].xspeed), 10*(iy+particles[i].yspeed));
 			strokeWeight(1);
 		}
 	}
