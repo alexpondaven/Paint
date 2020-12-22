@@ -1,14 +1,14 @@
 //inspired by https://www.youtube.com/watch?v=vqE8DMfOajk&ab_channel=TheCodingTrain
 var particles = [];
-var n = 2; // number of particles
+var n = 10; // number of particles
 
 function setup() {
 	for (let i = 0;i<n;i++){
-		let size = 200;
+		let size = random(255);
 		let particle = new Particle(random(window.innerWidth), // x
 									random(window.innerHeight), // y
 									size, // radius
-									size, // mass
+									size*100, // mass
 									i, // name
 									color(random(255),random(255),random(255))); // colour
 		particles.push(particle);
@@ -25,10 +25,12 @@ function draw() {
 	background(0);
 	for (let i = 0;i<n;i++){
 		particles[i].update();
-		collide();
-
+	}
+	collide();
+	for (let i = 0;i<n;i++){
 		particles[i].show();
 	}
+
 
 }
 // also need to consider 2 collisions simultaneously
@@ -59,7 +61,7 @@ function collide() { // Brute force
 			
 			// find points on each circle between centres
 			var theta = atan(deltay/deltax);
-			console.log(theta)
+			// console.log(theta * 180/PI)
 			if (ix > jx){
 				var p_ix = ix - ir * cos(theta);
 				var p_iy = iy - ir * sin(theta);
@@ -71,11 +73,16 @@ function collide() { // Brute force
 				var p_jx = jx - jr * cos(theta);
 				var p_jy = jy - jr * sin(theta);
 			}
+
+			p_x = ((ix * jr) + (jx * ir)) / (ir + jr);
+			p_y = ((iy * jr) + (jy * ir)) / (ir + jr);
+
 			
 			// Draw rectangles at point on radius closest to other ball's centre
-			fill(255);
-			rect(p_ix, p_iy, 10, 10);
-			rect(p_jx, p_jy, 10, 10);
+			// fill(255);
+			// circle(p_x, p_y, 10, 10);
+			// circle(p_ix, p_iy, 10, 10);
+			// circle(p_jx, p_jy, 10, 10);
 
 			// Make sure particles stay at border (do not intersect)
 			var move_ix = -(p_ix-p_jx)/2;
@@ -83,39 +90,20 @@ function collide() { // Brute force
 			var move_iy = -(p_iy-p_jy)/2;
 			var move_jy = (p_iy-p_jy)/2;
 
-			if (inside <= 0){
+			if (inside < 0){
 				particles[i].x += move_ix;
 				// console.log(move_ix);
 				particles[i].y += move_iy;
 				particles[j].x += move_jx;
 				particles[j].y += move_jy;
 
-				if (ix>jx){
-					var ivtheta = atan(ixs/iys) - PI/2 + 2*theta;
-					var jvtheta = atan(jxs/jys) - PI/2 + 2*theta;
-				} else {
-					var ivtheta = atan(ixs/iys) - PI/2 + 2*theta;
-					var jvtheta = atan(jxs/jys) - PI/2 + 2*theta;
-				}
-				
-				particles[i].xspeed = ixs*cos(ivtheta);
-				particles[i].yspeed = iys*sin(ivtheta);
-				
-				
-				
-				particles[j].xspeed = jxs*cos(jvtheta);
-				particles[j].yspeed = jys*sin(jvtheta);
-				//Conserving momentum
-				// particles[i].xspeed = (((im-jm)/(im+jm))*ixs+(2*jm/(im+jm))*jxs)*cos(2*theta);
-				// particles[i].yspeed = (((im-jm)/(im+jm))*iys+(2*jm/(im+jm))*jys)*sin(2*theta);
 
-				// particles[j].xspeed = -((2*im/(im+jm))*ixs + ((im-jm)/(im+jm))*jxs)*cos(2*theta);
-				// particles[j].yspeed = ((2*im/(im+jm))*iys + ((im-jm)/(im+jm))*jys)*sin(2*theta);
+				particles[i].xspeed = (ixs * (im - jm) + (2 * jm * jxs)) / (im + jm);
+				particles[i].yspeed = (iys * (im - jm) + (2 * jm * jys)) / (im + jm);
+				particles[j].xspeed = (jxs * (jm - im) + (2 * im * ixs)) / (im + jm);
+				particles[j].yspeed = (jys * (jm - im) + (2 * im * iys)) / (im + jm);
+
 			}
-			stroke(0);
-			strokeWeight(5);
-			line(ix, iy, 10*(ix+particles[i].xspeed), 10*(iy+particles[i].yspeed));
-			strokeWeight(1);
 		}
 	}
 

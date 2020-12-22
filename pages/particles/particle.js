@@ -11,8 +11,8 @@ function Particle(x, y, r, mass, name="", colour) {
 
 	this.mass = mass;
 
-	this.xspeed = 6;
-	this.yspeed = 5;
+	this.xspeed = 1;
+	this.yspeed = 1;
 
 	this.colour = colour;
 
@@ -50,6 +50,6 @@ function Particle(x, y, r, mass, name="", colour) {
 		fill(this.colour);
 		circle(this.x,this.y,this.r);
 		fill(255);
-		text(this.name, this.x, this.y);
+		// text(this.name, this.x, this.y);
 	}
 }
