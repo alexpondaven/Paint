@@ -29,6 +29,14 @@ function draw() {
 	collide();
 	for (let i = 0;i<n;i++){
 		particles[i].show();
+
+		// show velocity vector
+		stroke(255);
+		line(particles[i].x, particles[i].y,
+			(particles[i].x + 15*particles[i].xspeed), 
+			(particles[i].y + 15*particles[i].yspeed));
+		console.log(particles[i].xspeed);
+		stroke(0);
 	}
 
 
@@ -79,7 +87,6 @@ function collide() { // Brute force
 
 			
 			// Draw rectangles at point on radius closest to other ball's centre
-			// fill(255);
 			// circle(p_x, p_y, 10, 10);
 			// circle(p_ix, p_iy, 10, 10);
 			// circle(p_jx, p_jy, 10, 10);
