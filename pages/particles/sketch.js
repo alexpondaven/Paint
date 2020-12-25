@@ -7,7 +7,7 @@ var n = 5; // number of particles
 
 function setup() {
 	for (let i = 0;i<n;i++){
-		let size = random(255);
+		let size = random(50,150);
 		let particle = new Particle(random(window.innerWidth), // x
 									random(window.innerHeight), // y
 									size, // radius
