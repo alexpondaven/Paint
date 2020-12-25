@@ -11,8 +11,8 @@ function Particle(x, y, r, mass, name="", colour) {
 
 	this.mass = mass;
 
-	this.xspeed = 2;
-	this.yspeed = 2;
+	this.xspeed = random(-2,2);
+	this.yspeed = random(-2,2);
 
 	this.colour = colour;
 

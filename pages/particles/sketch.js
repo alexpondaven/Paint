@@ -1,17 +1,26 @@
 //inspired by https://www.youtube.com/watch?v=vqE8DMfOajk&ab_channel=TheCodingTrain
-
+// https://lucidar.me/en/mechanics/elastic-collision-equations-simulation-part-4/
 // elastic collisions
+
+/**
+TODO:
+- understand why collisions seem to go out of control
+- add gravity between particles
+- add toolbars to tune settings
+- add balls by clicking screen (maybe with initial velocity of mouse)
+	- could maybe have a max number of balls, so it removes first ball in list
+**/
 
 var particles = [];
 var n = 5; // number of particles
 
 function setup() {
 	for (let i = 0;i<n;i++){
-		let size = random(50,150);
+		let size = random(100,150);
 		let particle = new Particle(random(window.innerWidth), // x
 									random(window.innerHeight), // y
 									size, // radius
-									size*100, // mass
+									size*size*size, // mass
 									i, // name
 									color(random(255),random(255),random(255))); // colour
 		particles.push(particle);
@@ -127,10 +136,10 @@ function collide() { // Brute force
 				v_21 = (u_21 * (im - jm) + (2 * jm * u_12)) / (im + jm);
 
 				// find v1 and v2
-				particles[i].xspeed = u_11 * (-sin(alpha1)) + v_12 * cos(alpha1) /1.05;
-				particles[i].yspeed = u_11 * cos(alpha1) + v_12 * sin(alpha1) /1.05;
-				particles[j].xspeed = u_22 * (-sin(alpha2)) - v_21 * cos(alpha2) /1.05;
-				particles[j].yspeed = u_22 * cos(alpha2) - v_21 * sin(alpha2) /1.05;
+				particles[i].xspeed = (u_11 * (-sin(alpha1)) + v_12 * cos(alpha1)) /1.05;
+				particles[i].yspeed = (u_11 * cos(alpha1) + v_12 * sin(alpha1)) /1.05;
+				particles[j].xspeed = (u_22 * (-sin(alpha2)) - v_21 * cos(alpha2)) /1.05;
+				particles[j].yspeed = (u_22 * cos(alpha2) - v_21 * sin(alpha2)) /1.05;
 
 				// velocity equations (assuming point masses)
 				// particles[i].xspeed = (ixs * (im - jm) + (2 * jm * jxs)) / (im + jm);
