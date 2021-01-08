@@ -12,7 +12,7 @@ TODO:
 **/
 
 var particles = [];
-var n = 5; // number of particles
+var n = 10; // number of particles
 
 function setup() {
 	for (let i = 0;i<n;i++){
@@ -110,18 +110,14 @@ function collide() { // Brute force
 			var move_jy = (p_iy-p_jy)/2;
 
 			if (inside < 0){
-				// prevent particle clipping (going into each other)
-				particles[i].x += move_ix;
-				particles[i].y += move_iy;
-				particles[j].x += move_jx;
-				particles[j].y += move_jy;
+				
 
 				// compute output velocities
 				//angles
-				var alpha1 = atan2(jy-iy,jx-ix);
+				var alpha1 = atan2(particles[j].y-particles[i].y,particles[j].x-particles[i].x);
 				var beta1 = atan2(iys,ixs);
 				var gamma1 = beta1-alpha1;
-				var alpha2 = atan2(iy-jy,ix-jx);
+				var alpha2 = atan2(particles[i].y-particles[j].y,particles[i].x-particles[j].x);
 				var beta2 = atan2(jys,jxs);
 				var gamma2 = beta2-alpha2;
 
@@ -147,6 +143,12 @@ function collide() { // Brute force
 				// particles[j].xspeed = (jxs * (jm - im) + (2 * im * ixs)) / (im + jm);
 				// particles[j].yspeed = (jys * (jm - im) + (2 * im * iys)) / (im + jm);
 
+				//angle of new 
+				// prevent particle clipping (going into each other)
+				particles[i].x += move_ix;
+				particles[i].y += move_iy;
+				particles[j].x += move_jx;
+				particles[j].y += move_jy;
 			}
 		}
 	}
